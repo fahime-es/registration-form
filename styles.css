@@ -1,0 +1,215 @@
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #020617;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --error: #ef4444;
+  --success: #22c55e;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --input-border: #1f2937;
+  --input-border-focus: #60a5fa;
+  --input-bg: #020617;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --transition-fast: 0.18s ease-out;
+  --shadow-card: 0 20px 45px rgba(15, 23, 42, 0.65);
+  --shadow-focus: 0 0 0 1px rgba(96, 165, 250, 0.7),
+    0 0 0 6px rgba(37, 99, 235, 0.25);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  background: linear-gradient(135deg, #020617 0%, #020617 60%, #020617 100%);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  max-width: 420px;
+  width: 100%;
+  padding: 32px 28px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.card__title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.card__subtitle {
+  margin: 0 0 24px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Form */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast), transform 0.08s ease-out;
+}
+
+input::placeholder {
+  color: #6b7280;
+}
+
+input:focus-visible {
+  border-color: var(--input-border-focus);
+  box-shadow: var(--shadow-focus);
+  transform: translateY(-1px);
+}
+
+/* States */
+
+input.valid {
+  border-color: var(--success);
+}
+
+input.invalid {
+  border-color: var(--error);
+}
+
+/* Error messages */
+
+.error-message {
+  min-height: 16px;
+  font-size: 0.75rem;
+  color: var(--error);
+}
+
+/* Password rules */
+
+.password-rules {
+  list-style: none;
+  padding-left: 0;
+  margin: 4px 0 0;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  display: grid;
+  gap: 3px;
+}
+
+.password-rules li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.password-rules li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.password-rules li.ok {
+  color: var(--success);
+}
+
+.password-rules li.ok::before {
+  content: "✓";
+}
+
+/* Button */
+
+button[type="submit"] {
+  margin-top: 8px;
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: not-allowed;
+  background: #1f2933;
+  color: #9ca3af;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast), box-shadow var(--transition-fast),
+    color var(--transition-fast), opacity var(--transition-fast);
+}
+
+button[type="submit"].enabled {
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent) 0%, #38bdf8 100%);
+  color: white;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+}
+
+button[type="submit"].enabled:hover {
+  background: linear-gradient(135deg, var(--accent-hover) 0%, #0ea5e9 100%);
+  transform: translateY(-1px);
+}
+
+button[type="submit"].enabled:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+/* Success message */
+
+.success-message {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--success);
+  min-height: 16px;
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  .card__title {
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <h1 class="card__title">Create an account</h1>
+      <p class="card__subtitle">
+        Please fill in the details below to register.
+      </p>
+
+      <form id="registerForm" novalidate>
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="off"
+            required
+          />
+          <small class="error-message" id="usernameError"></small>
+        </div>
+
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            autocomplete="name"
+            required
+          />
+          <small class="error-message" id="fullNameError"></small>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+          />
+          <small class="error-message" id="emailError"></small>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="new-password"
+            required
+          />
+          <small class="error-message" id="passwordError"></small>
+
+          <ul class="password-rules">
+            <li id="rule-length">At least 8 characters</li>
+            <li id="rule-number-symbol">At least 1 number or 1 symbol</li>
+            <li id="rule-no-name">Cannot contain your name</li>
+            <li id="rule-no-email">Cannot contain your email</li>
+          </ul>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" id="submitBtn" disabled>
+          Create account
+        </button>
+
+        <!-- Success Message -->
+        <p id="successMessage" class="success-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
