@@ -1,142 +1,115 @@
-const form = document.getElementById("registerForm");
-const usernameInput = document.getElementById("username");
-const fullNameInput = document.getElementById("fullName");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
+const signupTab = document.getElementById('signupTab');
+const signinTab = document.getElementById('signinTab');
+const signupForm = document.getElementById('signupForm');
+const signinForm = document.getElementById('signinForm');
 
-const usernameError = document.getElementById("usernameError");
-const fullNameError = document.getElementById("fullNameError");
-const emailError = document.getElementById("emailError");
-const passwordError = document.getElementById("passwordError");
+signupTab.addEventListener('click', () => {
+    signupTab.classList.add('active');
+    signinTab.classList.remove('active');
+    signupForm.classList.add('active');
+    signinForm.classList.remove('active');
+});
 
-const submitBtn = document.getElementById("submitBtn");
-const successMessage = document.getElementById("successMessage");
+signinTab.addEventListener('click', () => {
+    signinTab.classList.add('active');
+    signupTab.classList.remove('active');
+    signinForm.classList.add('active');
+    signupForm.classList.remove('active');
+});
 
-// Password rule items
-const ruleLength = document.getElementById("rule-length");
-const ruleNumberSymbol = document.getElementById("rule-number-symbol");
-const ruleNoName = document.getElementById("rule-no-name");
-const ruleNoEmail = document.getElementById("rule-no-email");
+const passwordInput = document.getElementById('password');
+const usernameInput = document.getElementById('username');
+const emailInput = document.getElementById('email');
+const fullnameInput = document.getElementById('fullname');
 
-const state = {
-  username: false,
-  fullName: false,
-  email: false,
-  password: false,
-};
+const reqStrength = document.getElementById('reqStrength');
+const reqName = document.getElementById('reqName');
+const reqLength = document.getElementById('reqLength');
+const reqNumber = document.getElementById('reqNumber');
 
-function updateSubmitState() {
-  const allValid = Object.values(state).every(Boolean);
-  if (allValid) {
-    submitBtn.disabled = false;
-    submitBtn.classList.add("enabled");
-  } else {
-    submitBtn.disabled = true;
-    submitBtn.classList.remove("enabled");
-  }
-}
+function validatePassword() {
+    const password = passwordInput.value;
+    const username = usernameInput.value.toLowerCase();
+    const email = emailInput.value.toLowerCase();
+    const fullname = fullnameInput.value.toLowerCase();
 
-function setInputState(input, isValid, messageElement, message) {
-  if (isValid) {
-    input.classList.remove("invalid");
-    input.classList.add("valid");
-    if (messageElement) messageElement.textContent = "";
-  } else {
-    input.classList.remove("valid");
-    input.classList.add("invalid");
-    if (messageElement) messageElement.textContent = message || "";
-  }
-}
-
-/* ---------- Username Validation ---------- */
-function validateUsername() {
-  const value = usernameInput.value.trim();
-  const usernameRegex = /^[a-zA-Z0-9]+$/;
-
-  if (value.length < 3 || value.length > 15) {
-    setInputState(
-      usernameInput,
-      false,
-      usernameError,
-      "Username must be between 3 and 15 characters"
-    );
-    state.username = false;
-  } else if (!usernameRegex.test(value)) {
-    setInputState(
-      usernameInput,
-      false,
-      usernameError,
-      "Username can only contain letters and numbers"
-    );
-    state.username = false;
-  } else {
-    setInputState(usernameInput, true, usernameError, "");
-    state.username = true;
-  }
-  updateSubmitState();
-}
-
-/* ---------- Full Name Validation ---------- */
-function validateFullName() {
-  const value = fullNameInput.value.trim();
-  // Only letters and spaces
-  const fullNameRegex = /^[A-Za-z\s]+$/;
-
-  if (!value) {
-    setInputState(
-      fullNameInput,
-      false,
-      fullNameError,
-      "Please enter your full name"
-    );
-    state.fullName = false;
-  } else if (!fullNameRegex.test(value)) {
-    setInputState(
-      fullNameInput,
-      false,
-      fullNameError,
-      "Full name must contain only letters and spaces"
-    );
-    state.fullName = false;
-  } else {
-    // at least two words
-    const parts = value.split(/\s+/).filter(Boolean);
-    if (parts.length < 2) {
-      setInputState(
-        fullNameInput,
-        false,
-        fullNameError,
-        "Please enter your full name"
-      );
-      state.fullName = false;
+    if (password.length >= 8) {
+        reqLength.classList.add('valid');
     } else {
-      setInputState(fullNameInput, true, fullNameError, "");
-      state.fullName = true;
+        reqLength.classList.remove('valid');
     }
-  }
-  validatePassword(); // 
-  updateSubmitState();
+
+    if (/[0-9!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        reqNumber.classList.add('valid');
+    } else {
+        reqNumber.classList.remove('valid');
+    }
+
+    const passwordLower = password.toLowerCase();
+    const containsName = (username && passwordLower.includes(username)) || 
+                        (email && passwordLower.includes(email.split('@')[0])) ||
+                        (fullname && passwordLower.includes(fullname));
+
+    if (!containsName && password.length > 0) {
+        reqName.classList.add('valid');
+    } else {
+        reqName.classList.remove('valid');
+    }
+
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+
+    if (strength <= 2) {
+        reqStrength.textContent = 'Password Strength - Weak';
+        reqStrength.classList.remove('valid');
+    } else if (strength <= 4) {
+        reqStrength.textContent = 'Password Strength - Medium';
+        reqStrength.classList.add('valid');
+    } else {
+        reqStrength.textContent = 'Password Strength - Strong';
+        reqStrength.classList.add('valid');
+    }
 }
 
-/* ---------- Email Validation ---------- */
-function validateEmail() {
-  const value = emailInput.value.trim();
-  const emailRegex =
-    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+passwordInput.addEventListener('input', validatePassword);
+usernameInput.addEventListener('input', validatePassword);
+emailInput.addEventListener('input', validatePassword);
+fullnameInput.addEventListener('input', validatePassword);
 
-  if (!emailRegex.test(value)) {
-    setInputState(
-      emailInput,
-      false,
-      emailError,
-      "Please enter a valid email address"
-    );
-    state.email = false;
-  } else {
-    setInputState(emailInput, true, emailError, "");
-    state.email = true;
-  }
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = {
+        username: document.getElementById('username').value,
+        fullname: document.getElementById('fullname').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    };
+    console.log('Sign Up:', data);
+    alert(`Account created!
 
-  validatePassword(); // 
-  updateSubmitState();
-}
+Username: ${data.username}
+Email: ${data.email}`);
+});
+
+signinForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = {
+        email: document.getElementById('signinEmail').value,
+        password: document.getElementById('signinPassword').value
+    };
+    console.log('Sign In:', data);
+    alert(`Signed in successfully!
+
+Email: ${data.email}`);
+});
+
+document.querySelectorAll('.forgot-password').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('Password reset link sent to your email!');
+    });
+});
