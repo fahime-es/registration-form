@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>User Registration Form</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleFlow - Sign Up</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="page">
-    <section class="card">
-      <h1 class="card__title">Create an account</h1>
-      <p class="card__subtitle">
-        Please fill in the details below to register.
-      </p>
+    <div class="container">
+        <div class="left-panel">
+            <div class="left-content">
+                <h1>Welcome to SimpleFlow</h1>
+                <p class="subtitle">Your Gateway to Effortless Management.</p>
 
-      <form id="registerForm" novalidate>
-        <!-- Username -->
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            autocomplete="off"
-            required
-          />
-          <small class="error-message" id="usernameError"></small>
+                <h2>Seamless Collaboration</h2>
+                <p>Effortlessly work together with your team in real-time.</p>
+            </div>
         </div>
 
-        <!-- Full Name -->
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            autocomplete="name"
-            required
-          />
-          <small class="error-message" id="fullNameError"></small>
+        <div class="right-panel">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h3>SimpleFlow</h3>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" id="signupTab">Sign Up</button>
+                <button class="tab" id="signinTab">Sign In</button>
+            </div>
+
+            <form class="signup-form active" id="signupForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Pick a Username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" placeholder="Enter Your Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter Your Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <div class="password-header">
+                        <label for="password">Password</label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <input type="password" id="password" placeholder="••••••••••••••" required>
+
+                    <div class="password-requirements">
+                        <div class="requirement" id="reqStrength">Password Strength - Weak</div>
+                        <div class="requirement" id="reqName">Cannot contain your name or email address</div>
+                        <div class="requirement" id="reqLength">At least 8 characters</div>
+                        <div class="requirement" id="reqNumber">Contains a number or symbol</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="create-btn">Create Account</button>
+
+                <p class="terms">
+                    By signing up to create an account I accept Company's<br>
+                    <a href="#">Terms of use</a> & <a href="#">Privacy Policy</a>.
+                </p>
+            </form>
+
+            <form class="signin-form" id="signinForm">
+                <div class="form-group">
+                    <label for="signinEmail">Email</label>
+                    <input type="email" id="signinEmail" placeholder="Enter Your Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <div class="password-header">
+                        <label for="signinPassword">Password</label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <input type="password" id="signinPassword" placeholder="••••••••••••••" required>
+                </div>
+
+                <button type="submit" class="create-btn">Sign In</button>
+
+                <p class="terms">
+                    Don't have an account? Click Sign Up above.
+                </p>
+            </form>
         </div>
+    </div>
 
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            autocomplete="email"
-            required
-          />
-          <small class="error-message" id="emailError"></small>
-        </div>
-
-        <!-- Password -->
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            autocomplete="new-password"
-            required
-          />
-          <small class="error-message" id="passwordError"></small>
-
-          <ul class="password-rules">
-            <li id="rule-length">At least 8 characters</li>
-            <li id="rule-number-symbol">At least 1 number or 1 symbol</li>
-            <li id="rule-no-name">Cannot contain your name</li>
-            <li id="rule-no-email">Cannot contain your email</li>
-          </ul>
-        </div>
-
-        <!-- Submit -->
-        <button type="submit" id="submitBtn" disabled>
-          Create account
-        </button>
-
-        <!-- Success Message -->
-        <p id="successMessage" class="success-message" aria-live="polite"></p>
-      </form>
-    </section>
-  </main>
-
-  <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
