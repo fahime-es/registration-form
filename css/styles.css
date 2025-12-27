@@ -59,7 +59,7 @@ body {
 }
 
 .center-text h2 {
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 800;
     margin-bottom: 20px;
 }
@@ -320,6 +320,7 @@ input.valid {
         bottom: 40px;
     }
 }
+
 
 
 
