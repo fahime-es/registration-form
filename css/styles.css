@@ -37,14 +37,14 @@ body {
 }
 
 .left-card h1 {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 800;
     margin-bottom: 16px;
     line-height: 1.2;
 }
 
 .subtitle {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
     margin-bottom: 39px;
 }
@@ -59,13 +59,13 @@ body {
 }
 
 .center-text h2 {
-    font-size: 42px;
+    font-size: 30px;
     font-weight: 800;
     margin-bottom: 20px;
 }
 
 .description {
-    font-size: 18px;
+    font-size: 10px;
     font-weight: 400;
     line-height: 1.6;
 }
@@ -320,6 +320,7 @@ input.valid {
         bottom: 40px;
     }
 }
+
 
 
 
