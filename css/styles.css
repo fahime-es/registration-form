@@ -72,8 +72,8 @@ body {
 
 /* Right Form Card */
 .right-card {
-     width: 358px;
-    height: 692px;
+     width: 280px;
+    height: 700px;
     Top: 166.5px;
     left: 900pxl
     Gap: 32px;
@@ -320,6 +320,7 @@ input.valid {
         bottom: 40px;
     }
 }
+
 
 
 
