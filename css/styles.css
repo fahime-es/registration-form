@@ -72,7 +72,7 @@ body {
 
 /* Right Form Card */
 .right-card {
-     width: 280px;
+     width: 100px;
     height: 700px;
     Top: 166.5px;
     left: 900pxl
@@ -320,6 +320,7 @@ input.valid {
         bottom: 40px;
     }
 }
+
 
 
 
