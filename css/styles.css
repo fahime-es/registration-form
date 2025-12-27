@@ -23,9 +23,8 @@ body {
 
 /* Left Blue Card */
 .left-card {
-    width: 842px;
-    height: 960px;
-    left: -166px;
+    width: 500px;
+    height: 700px;
     background: url('../blue-background.jpg') center/cover;
     background-color: #465FF1;
     border-radius: 20px;
@@ -316,6 +315,7 @@ input.valid {
         bottom: 40px;
     }
 }
+
 
 
 
