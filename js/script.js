@@ -1,115 +1,216 @@
-const signupTab = document.getElementById('signupTab');
-const signinTab = document.getElementById('signinTab');
-const signupForm = document.getElementById('signupForm');
-const signinForm = document.getElementById('signinForm');
-
-signupTab.addEventListener('click', () => {
-    signupTab.classList.add('active');
-    signinTab.classList.remove('active');
-    signupForm.classList.add('active');
-    signinForm.classList.remove('active');
-});
-
-signinTab.addEventListener('click', () => {
-    signinTab.classList.add('active');
-    signupTab.classList.remove('active');
-    signinForm.classList.add('active');
-    signupForm.classList.remove('active');
-});
-
-const passwordInput = document.getElementById('password');
+const form = document.getElementById('signupForm');
 const usernameInput = document.getElementById('username');
-const emailInput = document.getElementById('email');
 const fullnameInput = document.getElementById('fullname');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const submitBtn = document.getElementById('submitBtn');
+const usernameError = document.getElementById('usernameError');
+const successMessage = document.getElementById('successMessage');
+const req1 = document.getElementById('req1');
+const req2 = document.getElementById('req2');
+const req3 = document.getElementById('req3');
+const req4 = document.getElementById('req4');
 
-const reqStrength = document.getElementById('reqStrength');
-const reqName = document.getElementById('reqName');
-const reqLength = document.getElementById('reqLength');
-const reqNumber = document.getElementById('reqNumber');
+// Tab switching
+document.getElementById('signUpTab').addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('signInTab').classList.remove('active');
+});
 
-function validatePassword() {
-    const password = passwordInput.value;
+document.getElementById('signInTab').addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('signUpTab').classList.remove('active');
+});
+
+// Password validation
+passwordInput.addEventListener('input', function() {
+    const password = this.value;
     const username = usernameInput.value.toLowerCase();
     const email = emailInput.value.toLowerCase();
     const fullname = fullnameInput.value.toLowerCase();
+    
+    let validCount = 0;
 
-    if (password.length >= 8) {
-        reqLength.classList.add('valid');
+    // Check password strength
+    let strength = 'Weak';
+    if (password.length >= 8 && /[0-9!@#$%^&*]/.test(password)) {
+        if (password.length >= 12 && /[A-Z]/.test(password) && /[a-z]/.test(password)) {
+            strength = 'Strong';
+            validCount++;
+        } else if (password.length >= 8) {
+            strength = 'Medium';
+        }
+    }
+    
+    req1.querySelector('span:last-child').textContent = 'Password Strength : ' + strength;
+    
+    if (strength === 'Strong') {
+        req1.classList.add('valid');
+        req1.classList.remove('invalid');
+        passwordInput.classList.add('valid');
+        passwordInput.classList.remove('error');
+    } else if (strength === 'Medium') {
+        req1.classList.remove('valid');
+        req1.classList.remove('invalid');
+        passwordInput.classList.remove('valid');
+        passwordInput.classList.remove('error');
     } else {
-        reqLength.classList.remove('valid');
+        req1.classList.remove('valid');
+        req1.classList.add('invalid');
+        if (password.length > 0) {
+            passwordInput.classList.add('error');
+            passwordInput.classList.remove('valid');
+        }
     }
 
-    if (/[0-9!@#$%^&*(),.?":{}|<>]/.test(password)) {
-        reqNumber.classList.add('valid');
-    } else {
-        reqNumber.classList.remove('valid');
-    }
-
+    // Check if password contains name or email
     const passwordLower = password.toLowerCase();
-    const containsName = (username && passwordLower.includes(username)) || 
-                        (email && passwordLower.includes(email.split('@')[0])) ||
-                        (fullname && passwordLower.includes(fullname));
-
-    if (!containsName && password.length > 0) {
-        reqName.classList.add('valid');
+    const containsInfo = username && passwordLower.includes(username) ||
+                        email && passwordLower.includes(email.split('@')[0]) ||
+                        fullname && passwordLower.includes(fullname);
+    
+    if (!containsInfo && password.length > 0) {
+        req2.classList.add('valid');
+        req2.classList.remove('invalid');
+        validCount++;
     } else {
-        reqName.classList.remove('valid');
+        req2.classList.remove('valid');
+        if (password.length > 0) req2.classList.add('invalid');
     }
 
-    let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[a-z]/.test(password)) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
-
-    if (strength <= 2) {
-        reqStrength.textContent = 'Password Strength - Weak';
-        reqStrength.classList.remove('valid');
-    } else if (strength <= 4) {
-        reqStrength.textContent = 'Password Strength - Medium';
-        reqStrength.classList.add('valid');
+    // Check length
+    if (password.length >= 8) {
+        req3.classList.add('valid');
+        req3.classList.remove('invalid');
+        validCount++;
     } else {
-        reqStrength.textContent = 'Password Strength - Strong';
-        reqStrength.classList.add('valid');
+        req3.classList.remove('valid');
+        if (password.length > 0) req3.classList.add('invalid');
     }
-}
 
-passwordInput.addEventListener('input', validatePassword);
-usernameInput.addEventListener('input', validatePassword);
-emailInput.addEventListener('input', validatePassword);
-fullnameInput.addEventListener('input', validatePassword);
+    // Check for number or symbol
+    if (/[0-9!@#$%^&*]/.test(password)) {
+        req4.classList.add('valid');
+        req4.classList.remove('invalid');
+        validCount++;
+    } else {
+        req4.classList.remove('valid');
+        if (password.length > 0) req4.classList.add('invalid');
+    }
 
-signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = {
-        username: document.getElementById('username').value,
-        fullname: document.getElementById('fullname').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
-    };
-    console.log('Sign Up:', data);
-    alert(`Account created!
-
-Username: ${data.username}
-Email: ${data.email}`);
+    // Update button state and input border color
+    if (validCount === 4) {
+        submitBtn.classList.add('ready');
+        passwordInput.classList.add('valid');
+        passwordInput.classList.remove('error');
+    } else {
+        submitBtn.classList.remove('ready');
+        if (password.length > 0) {
+            passwordInput.classList.add('error');
+            passwordInput.classList.remove('valid');
+        }
+    }
 });
 
-signinForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = {
-        email: document.getElementById('signinEmail').value,
-        password: document.getElementById('signinPassword').value
-    };
-    console.log('Sign In:', data);
-    alert(`Signed in successfully!
-
-Email: ${data.email}`);
+// Username validation
+usernameInput.addEventListener('blur', function() {
+    const username = this.value;
+    if (username.length > 0 && (username.length < 3 || username.length > 15)) {
+        usernameError.textContent = 'Username must be between 3 and 15 characters';
+        this.classList.add('error');
+    } else {
+        usernameError.textContent = '';
+        this.classList.remove('error');
+        if (username.length >= 3) {
+            this.classList.add('valid');
+        }
+    }
 });
 
-document.querySelectorAll('.forgot-password').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Password reset link sent to your email!');
-    });
+usernameInput.addEventListener('input', function() {
+    if (this.classList.contains('error')) {
+        const username = this.value;
+        if (username.length >= 3 && username.length <= 15) {
+            usernameError.textContent = '';
+            this.classList.remove('error');
+            this.classList.add('valid');
+        }
+    }
+});
+
+// Email validation
+emailInput.addEventListener('blur', function() {
+    if (this.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+        this.classList.add('valid');
+        this.classList.remove('error');
+    } else if (this.value) {
+        this.classList.add('error');
+        this.classList.remove('valid');
+    }
+});
+
+// Fullname validation
+fullnameInput.addEventListener('blur', function() {
+    if (this.value.length > 0) {
+        this.classList.add('valid');
+        this.classList.remove('error');
+    }
+});
+
+// Form submission
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const username = usernameInput.value;
+    const fullname = fullnameInput.value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    // Validate username
+    if (username.length < 3 || username.length > 15) {
+        usernameError.textContent = 'Username must be between 3 and 15 characters';
+        usernameInput.classList.add('error');
+        return;
+    }
+
+    // Validate all fields are filled
+    if (!fullname || !email || !password) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    // Check if all password requirements are met
+    const allValid = req1.classList.contains('valid') &&
+                    req2.classList.contains('valid') &&
+                    req3.classList.contains('valid') &&
+                    req4.classList.contains('valid');
+    
+    if (!allValid) {
+        alert('Please meet all password requirements');
+        return;
+    }
+
+    // Show success message
+    successMessage.classList.add('show');
+    form.style.display = 'none';
+    
+    setTimeout(() => {
+        successMessage.classList.remove('show');
+        form.style.display = 'block';
+        form.reset();
+        
+        // Reset password requirements
+        [req1, req2, req3, req4].forEach(req => {
+            req.classList.remove('valid');
+            req.classList.remove('invalid');
+        });
+        
+        // Reset input borders
+        [usernameInput, fullnameInput, emailInput, passwordInput].forEach(input => {
+            input.classList.remove('valid');
+            input.classList.remove('error');
+        });
+        
+        submitBtn.classList.remove('ready');
+    }, 3000);
 });
