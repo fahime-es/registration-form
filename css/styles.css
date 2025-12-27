@@ -25,7 +25,7 @@ body {
 .left-card {
     width: 676px;
     height: 960px;
-    background: url('../assets/blue-background.jpg') center/cover;
+    background: url('../blue-background.jpg') center/cover;
     background-color: #465FF1;
     border-radius: 20px;
     padding: 60px;
@@ -315,3 +315,4 @@ input.valid {
         bottom: 40px;
     }
 }
+
