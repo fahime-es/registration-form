@@ -37,7 +37,7 @@ body {
 }
 
 .left-card h1 {
-    font-size: 48px;
+    font-size: 30px;
     font-weight: 800;
     margin-bottom: 16px;
     line-height: 1.2;
@@ -320,6 +320,7 @@ input.valid {
         bottom: 40px;
     }
 }
+
 
 
 
