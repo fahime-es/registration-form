@@ -5,8 +5,8 @@
 }
 
 body {
-    font-family: 'Figtree', sans-serif;
     background-color: #ffffff;
+        font-family: 'Figtree', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,17 +18,19 @@ body {
     display: flex;
     gap: 40px;
     max-width: 1200px;
+    max-height: 800px;
     width: 100%;
+    max-height: none;
 }
 
 /* Left Blue Card */
 .left-card {
     width: 500px;
-    height: 700px;
+    height: 800px;
     background: url('../blue-background.jpg') center/cover;
     background-color: #465FF1;
     border-radius: 20px;
-    padding: 60px;
+    padding: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -37,6 +39,7 @@ body {
 }
 
 .left-card h1 {
+     text-align: center;
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 16px;
@@ -60,33 +63,32 @@ body {
 }
 
 .center-text h2 {
-    font-size: 15px;
+    font-size: 28px;
     font-weight: 800;
     margin-bottom: 20px;
 }
 
 .description {
-    font-size: 10px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 1.6;
 }
 
 /* Right Form Card */
 .right-card {
-     width: 100px;
-    height: 700px;
+     width: 70px;
+    height: auto;
     Top: 166.5px;
     left: 900pxl
     Gap: 32px;
     flex: 1;
-    background: white;
+    background: #ffffff;
     border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding-top: 20px;
 }
 
 .form-container {
-    max-width: 450px;
+    max-width: 400px;
     margin: 0 auto;
 }
 
@@ -123,15 +125,18 @@ body {
 /* Tab Buttons */
 .tab-buttons {
     display: flex;
-    gap: 12px;
+    gap: 0px;
     margin-bottom: 30px;
+    background-color: #ECF0FF;
+        border-radius: 10px;
+
 }
 
 .tab-btn {
     flex: 1;
     padding: 12px 24px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-family: 'Figtree', sans-serif;
     font-size: 16px;
     font-weight: 600;
@@ -144,6 +149,9 @@ body {
 .tab-btn.active {
     background-color: #465FF1;
     color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 .tab-btn:not(.active):hover {
@@ -167,8 +175,8 @@ label {
 .forgot-password {
     float: right;
     font-size: 12px;
-    color: #666;
-    text-decoration: none;
+    color: #9C9AA5;
+    text-decoration: underline;
 }
 
 .forgot-password:hover {
@@ -321,7 +329,6 @@ input.valid {
         bottom: 40px;
     }
 }
-
 
 
 
