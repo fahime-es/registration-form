@@ -44,6 +44,7 @@ body {
 }
 
 .subtitle {
+     text-align: center;
     font-size: 15px;
     font-weight: 400;
     margin-bottom: 39px;
@@ -320,6 +321,7 @@ input.valid {
         bottom: 40px;
     }
 }
+
 
 
 
