@@ -3,96 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SimpleFlow - Sign Up</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Sign Up Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
-        <div class="left-panel">
-            <div class="left-content">
-                <h1>Welcome to SimpleFlow</h1>
-                <p class="subtitle">Your Gateway to Effortless Management.</p>
-
-                <h2>Seamless Collaboration</h2>
-                <p>Effortlessly work together with your team in real-time.</p>
+        <!-- Left Blue Card -->
+        <div class="left-card">
+            <div>
+                <h1>Turn your ideas<br>into reality</h1>
+                <p class="subtitle">Start for free and get attractive offers<br>from the community</p>
+            </div>
+            <div class="center-text">
+                <h2>Consistent<br>productivity</h2>
+                <p class="description">Use our web app to manage your daily tasks and boost your productivity</p>
             </div>
         </div>
 
-        <div class="right-panel">
-            <div class="logo">
-                <div class="logo-icon"></div>
-                <h3>SimpleFlow</h3>
+        <!-- Right Form Card -->
+        <div class="right-card">
+            <div class="form-container">
+                <div class="logo-header">
+                    <div class="logo-icon">
+                        <img src="assets/s.png" alt="Logo">
+                    </div>
+                    <h2>Startup 3</h2>
+                </div>
+
+                <div class="tab-buttons">
+                    <button class="tab-btn active" id="signUpTab">Sign Up</button>
+                    <button class="tab-btn" id="signInTab">Sign In</button>
+                </div>
+
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter your username" required>
+                        <span class="error-message" id="usernameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            Password
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        
+                        <div class="password-requirements">
+                            <div class="requirement" id="req1">
+                                <span class="checkmark">✓</span>
+                                <span>Password Strength : Weak</span>
+                            </div>
+                            <div class="requirement" id="req2">
+                                <span class="checkmark">✓</span>
+                                <span>Cannot contain your name or email address</span>
+                            </div>
+                            <div class="requirement" id="req3">
+                                <span class="checkmark">✓</span>
+                                <span>At least 8 characters</span>
+                            </div>
+                            <div class="requirement" id="req4">
+                                <span class="checkmark">✓</span>
+                                <span>Contains a number or symbol</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">Create account</button>
+
+                    <p class="terms">
+                        By signing up, you agree to the <a href="#">Terms of Service</a><br>
+                        and <a href="#">Privacy Policy</a>
+                    </p>
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    ✓ Account created successfully!
+                </div>
             </div>
-
-            <div class="tabs">
-                <button class="tab active" id="signupTab">Sign Up</button>
-                <button class="tab" id="signinTab">Sign In</button>
-            </div>
-
-            <form class="signup-form active" id="signupForm">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Pick a Username" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" placeholder="Enter Your Name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter Your Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <div class="password-header">
-                        <label for="password">Password</label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-                    <input type="password" id="password" placeholder="••••••••••••••" required>
-
-                    <div class="password-requirements">
-                        <div class="requirement" id="reqStrength">Password Strength - Weak</div>
-                        <div class="requirement" id="reqName">Cannot contain your name or email address</div>
-                        <div class="requirement" id="reqLength">At least 8 characters</div>
-                        <div class="requirement" id="reqNumber">Contains a number or symbol</div>
-                    </div>
-                </div>
-
-                <button type="submit" class="create-btn">Create Account</button>
-
-                <p class="terms">
-                    By signing up to create an account I accept Company's<br>
-                    <a href="#">Terms of use</a> & <a href="#">Privacy Policy</a>.
-                </p>
-            </form>
-
-            <form class="signin-form" id="signinForm">
-                <div class="form-group">
-                    <label for="signinEmail">Email</label>
-                    <input type="email" id="signinEmail" placeholder="Enter Your Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <div class="password-header">
-                        <label for="signinPassword">Password</label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-                    <input type="password" id="signinPassword" placeholder="••••••••••••••" required>
-                </div>
-
-                <button type="submit" class="create-btn">Sign In</button>
-
-                <p class="terms">
-                    Don't have an account? Click Sign Up above.
-                </p>
-            </form>
         </div>
     </div>
 
     <script src="js/script.js"></script>
 </body>
 </html>
-
-
